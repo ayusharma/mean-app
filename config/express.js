@@ -1,8 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
-const comrepss = require('compress');
+const comrepss = require('compression');
 const bodyParser = require('body-parser');
-const methodOverrride = require('method-override');
+const methodOverride = require('method-override');
 
 module.exports = function() {
   const app = express();
@@ -17,7 +17,7 @@ module.exports = function() {
   // request parser
   app.use(bodyParser.urlencoded({extended: true }));
   app.use(bodyParser.json());
-  
+
   // Extended methods PUT, DELETE
   app.use(methodOverride());
 
