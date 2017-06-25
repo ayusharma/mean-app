@@ -35,6 +35,7 @@ module.exports = function() {
   app.set('view engine', 'ejs');
 
   require('../app/routes/index.server.routes.js')(app);
+  require('../app/routes/user.server.routes.js')(app);
   // Static server
   // Note how the express.static() middleware is placed below the call for the
   // routing file. This order matters because if it were above it, Express would
