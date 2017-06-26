@@ -13,7 +13,7 @@ exports.create = function (req, res, next) {
 };
 
 exports.list = function (req, res, next) {
-  User.find ({},'username email', (err, users)=> {
+  User.find ({}, (err, users)=> {
     if (err) {
       return next(err);
     } else {
@@ -38,3 +38,23 @@ exports.userById = function (req, res, next, id) {
       }
   });
 };
+
+exports.update = function (req, res, next) {
+  User.findByIdAndUpdate(req.user.id, req.body, { new: true }, (err, user)=> {
+    if (err) {
+      return next(err);
+    } else {
+      res.status(200).json(user);
+    }
+  })
+};
+
+exports.delete = function (req, res, next) {
+  req.user.remove((err, user) => {
+    if (err) {
+      return next(err);
+    } else {
+      res.status(200).json(user);
+    }
+  });
+}
