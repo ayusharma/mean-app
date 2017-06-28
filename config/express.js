@@ -4,6 +4,8 @@ const comrepss = require('compression');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const session = require('express-session');
+const flash = require('connect-flash');
+const passport = require('passport');
 const config = require('./config');
 
 module.exports = function() {
@@ -29,6 +31,14 @@ module.exports = function() {
     resave: true,
     secret: config.sessionSecret
   }))
+
+  app.use(flash());
+
+
+
+  //passport
+  app.use(passport.initialize());
+  app.use(passport.session());
 
   // Templates
   app.set('views', './app/views');
