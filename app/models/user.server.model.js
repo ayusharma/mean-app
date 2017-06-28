@@ -51,22 +51,22 @@ UserSchema.methods.authenticate = function(password) {
   return this.password === this.hashPassword(password);
 };
 
-// UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
-//     var possibleUsername = username + (suffix || '');
-//     this.findOne({
-//         username: possibleUsername
-//     }, (err, user) => {
-//         if (!err) {
-//             if (!user) {
-//                 callback(possibleUsername);
-//             } else {
-//                 return this.findUniqueUsername(username, (suffix || 0) +  1, callback);
-//             }
-//         } else {
-//             callback(null);
-//         }
-//     });
-// };
+UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
+    var possibleUsername = username + (suffix || '');
+    this.findOne({
+        username: possibleUsername
+    }, (err, user) => {
+        if (!err) {
+            if (!user) {
+                callback(possibleUsername);
+            } else {
+                return this.findUniqueUsername(username, (suffix || 0) +  1, callback);
+            }
+        } else {
+            callback(null);
+        }
+    });
+};
 
 UserSchema.pre('save', function (next){
   if (this.password) {
